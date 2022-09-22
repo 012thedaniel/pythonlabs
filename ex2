@@ -1,0 +1,30 @@
+import argparse
+
+
+# parsing arguments
+parser = argparse.ArgumentParser()
+
+parser.add_argument("operation")
+parser.add_argument("num1")
+parser.add_argument("num2")
+
+args = parser.parse_args()
+
+# reassigning arithmetic operators
+if args.operation == "add":
+    args.operation = "+"
+elif args.operation == "subtract":
+    args.operation = "-"
+elif args.operation == "multiply":
+    args.operation = "*"
+elif args.operation == "divide":
+    args.operation = "/"
+else:
+    raise Exception("Error, wrong arithmetic operator")
+
+# calculates result using eval function
+try:
+    result = eval(args.num1 + args.operation + args.num2)
+    print(round(result, len(str(int(result))) + 2))
+except Exception as e:
+    print(e)
