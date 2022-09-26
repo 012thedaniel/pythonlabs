@@ -1,30 +1,31 @@
 import argparse
+import math
+import operator
+import ast
 
 
-# parsing arguments
-parser = argparse.ArgumentParser()
+# parse arguments
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("function", help="Python function to run.")
+parser.add_argument("args", nargs='*')
 
-parser.add_argument("operation")
-parser.add_argument("num1")
-parser.add_argument("num2")
+arguments = parser.parse_args()
 
-args = parser.parse_args()
-
-# reassigning arithmetic operators
-if args.operation == "add":
-    args.operation = "+"
-elif args.operation == "subtract":
-    args.operation = "-"
-elif args.operation == "multiply":
-    args.operation = "*"
-elif args.operation == "divide":
-    args.operation = "/"
-else:
-    raise Exception("Error, wrong arithmetic operator")
-
-# calculates result using eval function
+# getting needed function from the built-in libraries
 try:
-    result = eval(args.num1 + args.operation + args.num2)
-    print(round(result, len(str(int(result))) + 2))
+    func = getattr(math, arguments.function)
+except AttributeError:
+    try:
+        func = getattr(operator, arguments.function)
+    except AttributeError:
+        print("There is no such a mathematical operation")
+
+# literal_eval casts string elements into integers
+nums = [ast.literal_eval(arg) for arg in arguments.args]
+
+# calculating the results and printing them
+try:
+    result = func(*nums)
+    print(result)
 except Exception as e:
     print(e)
