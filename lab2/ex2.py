@@ -8,6 +8,10 @@ class Rational:
         if not denominator:
             raise Exception(f'Denominator can\'t be equal to zero')
 
+        if numerator < 0 and denominator < 0:
+            numerator = -numerator
+            denominator = -denominator
+
         greatest_common_divisor = math.gcd(numerator, denominator)
         if not numerator or greatest_common_divisor == 1:
             self.__numerator = numerator
@@ -20,10 +24,7 @@ class Rational:
         print(f'Rational: {self.__numerator}/{self.__denominator}')
 
     def print_floating(self):
-        if not self.__denominator:
-            print(f'Floating-point number: 0')
-        else:
-            print(f'Floating-point number: {self.__numerator / self.__denominator}')
+        print(f'Floating-point number: {self.__numerator / self.__denominator}')
 
 
 your_num = Rational()
