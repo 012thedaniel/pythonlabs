@@ -40,8 +40,7 @@ print(f'The area of rectangle is: {rect.area()}\n'
 rect2 = Rectangle()
 print(f'\nThe area of rectangle is: {rect2.area()}\n'
       f'The perimetr of rectangle is: {rect2.perimetr()}')
-rect.length = 2.0
-rect.width = 5.0
-print(f'\nThe area of rectangle is: {rect.area()}\n'
-      f'The perimetr of rectangle is: {rect.perimetr()}')
-print(f'\nThe width of rectangle is {rect.width} and the length {rect.length}')
+rect2.length = 2.0
+rect2.width = 5.0
+print(f'\nThe area of rectangle is: {rect2.area()}\n'
+      f'The perimetr of rectangle is: {rect2.perimetr()}')
