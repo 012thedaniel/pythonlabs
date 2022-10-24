@@ -1,0 +1,87 @@
+[
+    {
+        "day": "monday",
+        "name": "margherita",
+        "main_ingredients": [
+            "mozzarella",
+            "tomato sauce",
+            "tomatoes"
+        ],
+        "price": 4.5
+    },
+    {
+        "day": "tuesday",
+        "name": "pepperoni",
+        "main_ingredients": [
+            "mozzarella",
+            "tomato sauce",
+            "tomatoes",
+            "pepperoni"
+        ],
+        "price": 5.25
+    },
+    {
+        "day": "wednesday",
+        "name": "4 cheese",
+        "main_ingredients": [
+            "tomato sauce",
+            "mozzarella",
+            "parmigiano",
+            "feta",
+            "cheddar"
+        ],
+        "price": 6.0
+    },
+    {
+        "day": "thursday",
+        "name": "hawaiian",
+        "main_ingredients": [
+            "tomato sauce",
+            "mozzarella",
+            "chicken",
+            "pineapple"
+        ],
+        "price": 5.5
+    },
+    {
+        "day": "friday",
+        "name": "bbq",
+        "main_ingredients": [
+            "bbq sauce",
+            "mozzarella",
+            "chicken",
+            "bacon",
+            "onion",
+            "mushrooms"
+        ],
+        "price": 6.0
+    },
+    {
+        "day": "saturday",
+        "name": "spicy",
+        "main_ingredients": [
+            "tomato sauce",
+            "tomatoes",
+            "mozzarella",
+            "bacon",
+            "pepperoni",
+            "hot chili pepper"
+        ],
+        "price": 5.75
+    },
+    {
+        "day": "sunday",
+        "name": "vegetarian",
+        "main_ingredients": [
+            "tomato sauce",
+            "tomatoes",
+            "mozzarella",
+            "olives",
+            "mushrooms",
+            "feta",
+            "spinach",
+            "bell pepper"
+        ],
+        "price": 5.75
+    }
+]
