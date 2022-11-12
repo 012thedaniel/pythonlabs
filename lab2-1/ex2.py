@@ -263,8 +263,8 @@ class Order:
             return f'No items added\n\n'
         tmp = ''
         for item in self._ordered_items:
-            tmp += item.__str__() + f'\t--Quantity: {self._ordered_items[item]}--\n'
-        return tmp + '\n'
+            tmp += item.__str__() + f'\t--Quantity: {self._ordered_items[item]}--\n\n'
+        return tmp 
 
     def __str__(self):
         return f'--Info about customer: {self._customer}\n' \
