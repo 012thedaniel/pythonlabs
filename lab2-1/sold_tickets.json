@@ -1,0 +1,57 @@
+{
+    "sold tickets": [
+        {
+            "type of the ticket": "StudentsTicket",
+            "unique ticket number": 1,
+            "price of the ticket": 5.0,
+            "name of the event": "European DDI User Conference",
+            "date of the event": "2022-11-15",
+            "name of the customer": "vlad",
+            "surname of the customer": "bilousov",
+            "mobile phone of the customer": "+380981481919",
+            "student id": 87151634
+        },
+        {
+            "type of the ticket": "StudentsTicket",
+            "unique ticket number": 2,
+            "price of the ticket": 20.0,
+            "name of the event": "International Conference of Microreaction Technology",
+            "date of the event": "2022-11-27",
+            "name of the customer": "varvara",
+            "surname of the customer": "grebenetska",
+            "mobile phone of the customer": "+380682751113",
+            "student id": 13181189
+        },
+        {
+            "type of the ticket": "StudentsTicket",
+            "unique ticket number": 3,
+            "price of the ticket": 20.0,
+            "name of the event": "International Conference of Microreaction Technology",
+            "date of the event": "2022-11-27",
+            "name of the customer": "vlad",
+            "surname of the customer": "bilousov",
+            "mobile phone of the customer": "+380981481919",
+            "student id": 87151634
+        },
+        {
+            "type of the ticket": "LateTicket",
+            "unique ticket number": 5,
+            "price of the ticket": 11.0,
+            "name of the event": "European DDI User Conference",
+            "date of the event": "2022-11-15",
+            "name of the customer": "daniel",
+            "surname of the customer": "dziuban",
+            "mobile phone of the customer": "+380662350484"
+        },
+        {
+            "type of the ticket": "RegularTicket",
+            "unique ticket number": 6,
+            "price of the ticket": 40,
+            "name of the event": "International Conference of Microreaction Technology",
+            "date of the event": "2022-11-27",
+            "name of the customer": "daniel",
+            "surname of the customer": "dziuban",
+            "mobile phone of the customer": "+380662350484"
+        }
+    ]
+}
