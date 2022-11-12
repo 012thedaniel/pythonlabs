@@ -3,11 +3,14 @@ import phonenumbers
 from datetime import datetime
 
 
+ALL_TYPES_OF_PIZZA = ['Pizza', 'MondayPizza', 'TuesdayPizza', 'WednesdayPizza', 'ThursdayPizza',
+                      'FridayPizza', 'SaturdayPizza', 'SundayPizza']
+
+
 class Pizza:
     _max_additional_ingredients = 5
 
-    def __init__(self, day, name, main_ingredients, price, additional_ingredients=None):
-        self.day = day
+    def __init__(self, name, main_ingredients, price, additional_ingredients=None):
         self.name = name
         if not main_ingredients:
             raise Exception(f'ingredients value can\'t be empty')
@@ -17,20 +20,6 @@ class Pizza:
         if additional_ingredients:
             self._additional_ingredients = {}
             self.add_additional_ingredients(additional_ingredients)
-
-    @property
-    def day(self):
-        return self._day
-
-    @day.setter
-    def day(self, value):
-        if not value:
-            raise Exception(f'day\'s value can\'t be empty')
-        if not isinstance(value, str):
-            raise Exception(f'day\'s value must be a string')
-        if value.lower() not in ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']:
-            raise Exception(f'the value, u entered as a day, isn\'t a day')
-        self._day = value.lower()
 
     @property
     def name(self):
@@ -52,7 +41,7 @@ class Pizza:
     def price(self, value):
         if not value:
             raise Exception(f'price value can\'t be empty')
-        if not isinstance(value, int) and not isinstance(value, float):
+        if not isinstance(value, int | float):
             raise Exception(f'price value must be a digit')
         if value <= 0:
             raise Exception(f'price value can\'t be equal or less than zero')
@@ -113,63 +102,63 @@ class Pizza:
                 additional_ingredients_json = json.load(additional_ingredients_file)
                 self.price -= additional_ingredients_json[ingredient]
 
-    def _get_additional_ingredients(self):
+    def _get_str_of_additional_ingredients(self):
         tmp = ''
         with open('additional_ingredients.json') as additional_ingredients_file:
             additional_ingredients_json = json.load(additional_ingredients_file)
             for ingredient in self._additional_ingredients:
                 tmp += f'{ingredient}({self._additional_ingredients[ingredient]}x' \
-                       f'{additional_ingredients_json[ingredient]}), '
+                       f'{additional_ingredients_json[ingredient]}$), '
         return tmp[:-2]
 
     def __str__(self):
         if not hasattr(self, '_additional_ingredients'):
-            return f'{self.day}\'s pizza: {self.name}\n' \
+            return f'pizza\'s name: {self.name}\n' \
                    f'main ingredients: {", ".join(map(str, self._main_ingredients))}\n' \
-                   f'price: {self.price}$\n\n'
+                   f'price: {self.price}$\n'
         else:
-            return f'{self.day}\'s pizza: {self.name}\n' \
+            return f'pizza\'s name: {self.name}\n' \
                    f'main ingredients: {", ".join(map(str, self._main_ingredients))}\n' \
-                   f'additional ingredients u added: {self._get_additional_ingredients()}\n' \
-                   f'price: {self.price}$\n\n'
+                   f'additional ingredients u added: {self._get_str_of_additional_ingredients()}\n' \
+                   f'price: {self.price}$\n'
 
 
 class MondayPizza(Pizza):
-    def __init__(self, day, name, main_ingredients, price, additional_ingredients=None):
-        super().__init__(day, name, main_ingredients, price, additional_ingredients)
+    def __init__(self, name, main_ingredients, price, additional_ingredients=None):
+        super().__init__(name, main_ingredients, price, additional_ingredients)
 
 
 class TuesdayPizza(Pizza):
-    def __init__(self, day, name, main_ingredients, price, additional_ingredients=None):
-        super().__init__(day, name, main_ingredients, price, additional_ingredients)
+    def __init__(self, name, main_ingredients, price, additional_ingredients=None):
+        super().__init__(name, main_ingredients, price, additional_ingredients)
 
 
 class WednesdayPizza(Pizza):
-    def __init__(self, day, name, main_ingredients, price, additional_ingredients=None):
-        super().__init__(day, name, main_ingredients, price, additional_ingredients)
+    def __init__(self, name, main_ingredients, price, additional_ingredients=None):
+        super().__init__(name, main_ingredients, price, additional_ingredients)
 
 
 class ThursdayPizza(Pizza):
-    def __init__(self, day, name, main_ingredients, price, additional_ingredients=None):
-        super().__init__(day, name, main_ingredients, price, additional_ingredients)
+    def __init__(self, name, main_ingredients, price, additional_ingredients=None):
+        super().__init__(name, main_ingredients, price, additional_ingredients)
 
 
 class FridayPizza(Pizza):
-    def __init__(self, day, name, main_ingredients, price, additional_ingredients=None):
-        super().__init__(day, name, main_ingredients, price, additional_ingredients)
+    def __init__(self, name, main_ingredients, price, additional_ingredients=None):
+        super().__init__(name, main_ingredients, price, additional_ingredients)
 
 
 class SaturdayPizza(Pizza):
-    def __init__(self, day, name, main_ingredients, price, additional_ingredients=None):
-        super().__init__(day, name, main_ingredients, price, additional_ingredients)
+    def __init__(self, name, main_ingredients, price, additional_ingredients=None):
+        super().__init__(name, main_ingredients, price, additional_ingredients)
 
 
 class SundayPizza(Pizza):
-    def __init__(self, day, name, main_ingredients, price, additional_ingredients=None):
-        super().__init__(day, name, main_ingredients, price, additional_ingredients)
+    def __init__(self, name, main_ingredients, price, additional_ingredients=None):
+        super().__init__(name, main_ingredients, price, additional_ingredients)
 
 
-def get_pizza_of_the_day():
+def create_pizza_of_the_day(*additional_ingredients):
     today = datetime.now().weekday()
     pizza_dictionary = {
         "0": MondayPizza,
@@ -180,15 +169,11 @@ def get_pizza_of_the_day():
         "5": SaturdayPizza,
         "6": SundayPizza
     }
-    return pizza_dictionary[str(today)]
-
-
-def create_pizza_of_the_day(*additional_ingredients):
-    today = datetime.now().weekday()
     with open('pizza_of_the_day.json') as f:
         pizza_otd_list = json.load(f)
         pizza_otd = pizza_otd_list[today]
-        return get_pizza_of_the_day()(pizza_otd["day"], pizza_otd["name"], pizza_otd["main_ingredients"], pizza_otd["price"], additional_ingredients)
+        return pizza_dictionary[str(today)](pizza_otd["name"], pizza_otd["main_ingredients"],
+                                            pizza_otd["price"], additional_ingredients)
 
 
 class Customer:
@@ -240,50 +225,49 @@ class Order:
     def __init__(self, customer, *args):
         if not isinstance(customer, Customer):
             raise Exception(f'Customer parameter must be an instance of Customer class')
-        if not all(isinstance(item, get_pizza_of_the_day()) for item in args):
-            raise Exception(f'Each item parameter must be an instance of {get_pizza_of_the_day()} class')
-        self.__customer = customer
-        self.__ordered_items = {item: args.count(item) for item in args}
+        if not all(type(item).__name__ in ALL_TYPES_OF_PIZZA for item in args):
+            raise Exception(f'Each item parameter must be an instance of class Pizza or it\'s derived class')
+        self._customer = customer
+        self._ordered_items = {item: args.count(item) for item in args}
 
     def add_item(self, item):
-        if not isinstance(item, get_pizza_of_the_day()):
-            raise Exception(f'Item parameter u want to add must be an instance of {get_pizza_of_the_day()} class')
-        if item not in self.__ordered_items:
-            self.__ordered_items[item] = 1
+        if not type(item).__name__ in ALL_TYPES_OF_PIZZA:
+            raise Exception(f'Item parameter u want to add must be an instance of class Pizza or it\'s derived class')
+        if item not in self._ordered_items:
+            self._ordered_items[item] = 1
         else:
-            self.__ordered_items[item] += 1
+            self._ordered_items[item] += 1
 
     def delete_item(self, item):
-        if not isinstance(item, get_pizza_of_the_day()):
-            raise Exception(f'Item parameter u want to delete must be an instance of {get_pizza_of_the_day()} class')
-        if item not in self.__ordered_items:
+        if not type(item).__name__ in ALL_TYPES_OF_PIZZA:
+            raise Exception(f'Item parameter u want to delete must be an instance '
+                            f'of class Pizza or it\'s derived class')
+        if item not in self._ordered_items:
             raise Exception(f'u\'re trying to delete the item, that isn\'t in the order')
         else:
-            if self.__ordered_items[item] == 1:
-                self.__ordered_items.pop(item, None)
+            if self._ordered_items[item] == 1:
+                self._ordered_items.pop(item, None)
             else:
-                self.__ordered_items[item] -= 1
+                self._ordered_items[item] -= 1
 
     def total_value(self):
-        if not self.__ordered_items:
+        if not self._ordered_items:
             return 0
         total_check = 0
-        for item in self.__ordered_items:
-            total_check += item.price * self.__ordered_items[item]
+        for item in self._ordered_items:
+            total_check += item.price * self._ordered_items[item]
         return total_check
 
     def get_items_info(self):
-        if not self.__ordered_items:
-            return f'No items added'
+        if not self._ordered_items:
+            return f'No items added\n\n'
         tmp = ''
-        for item in self.__ordered_items:
-            tmp += item.__str__()
-            if self.__ordered_items[item] > 1:
-                tmp += f'\tQuantity: {self.__ordered_items[item]}\n'
-        return tmp
+        for item in self._ordered_items:
+            tmp += item.__str__() + f'\t--Quantity: {self._ordered_items[item]}--\n'
+        return tmp + '\n'
 
     def __str__(self):
-        return f'--Info about customer: {self.__customer.__str__()}\n' \
+        return f'--Info about customer: {self._customer}\n' \
                f'--Info about added items:\n{self.get_items_info()}' \
                f'--Total value of your order: {self.total_value()}$'
 
@@ -299,5 +283,6 @@ pizza2.del_additional_ingredients(["bacon"])
 
 order1 = Order(customer1, pizza1, pizza1)
 order1.add_item(pizza2)
-order1.delete_item(pizza1)
+order1.add_item(pizza2)
+order1.delete_item(pizza2)
 print(order1)
