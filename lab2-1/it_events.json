@@ -1,0 +1,20 @@
+[
+    {
+        "name": "European DDI User Conference",
+        "date": "2022-11-15",
+        "available_num_of_tickets": 15,
+        "price": 10
+    },
+    {
+        "name": "International Conference of Microreaction Technology",
+        "date": "2022-11-27",
+        "available_num_of_tickets": 5,
+        "price": 40
+    },
+    {
+        "name": "Cloud Expo Paris",
+        "date": "2023-02-02",
+        "available_num_of_tickets": 50,
+        "price": 20
+    }
+]
